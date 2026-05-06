@@ -1,5 +1,5 @@
 # phase1.py
-# Author: Dev
+# Author: Shubham Kumar
 # Description: Vector based persona matching using FAISS and HuggingFace embeddings.
 # This is Phase 1 of the Grid07 AI assignment -> the "router" that decides which
 # bot should respond to a given post based on cosine similarity.
