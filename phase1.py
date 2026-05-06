@@ -32,7 +32,7 @@ class PersonaRouter:
     def __init__(self):
         # Loading a lightweight embedding model
         print("[INFO] Loading HuggingFace embedding model...")
-        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+        self.model = SentenceTransformer("BAAI/bge-small-en-v1.5")
 
         self.bot_ids = list(BOT_PERSONAS.keys())
         self.persona_texts = list(BOT_PERSONAS.values())
@@ -60,7 +60,7 @@ class PersonaRouter:
         index.add(embeddings)
         return index
 
-    def route_post_to_bots(self, post_content: str, threshold: float = 0.35) -> list[dict]:
+    def route_post_to_bots(self, post_content: str, threshold: float = 0.55) -> list[dict]:
         """
         Given a post, find which bots care about it based on cosine similarity.
 
@@ -102,3 +102,37 @@ class PersonaRouter:
             print(f"[INFO] {len(matched_bots)} bot(s) matched.")
 
         return matched_bots
+    
+
+# --------------------------------------------
+# Quick test
+# --------------------------------------------
+
+if __name__ == "__main__":
+    router = PersonaRouter()
+
+    # Test post 1 - should match Bot A and maybe Bot B
+    post1 = "OpenAI just released a new model that might replace junior developers."
+    results1 = router.route_post_to_bots(post1)
+    print("\n[RESULT] Matched Bots:")
+    for bot in results1:
+        print(f"  ✓ {bot['bot_id']} (score: {bot['similarity_score']})")
+
+    print("\n" + "=" * 60 + "\n")
+
+    # Test post 2 - should match Bot C (finance focused)
+    post2 = "The Federal Reserve just raised interest rates again. Markets are crashing."
+    results2 = router.route_post_to_bots(post2)
+    print("\n[RESULT] Matched Bots:")
+    for bot in results2:
+        print(f"  ✓ {bot['bot_id']} (score: {bot['similarity_score']})")
+
+    print("\n" + "=" * 60 + "\n")
+
+    # Test post 3 - should match Bot B (doomer / privacy angle)
+    post3 = "Big tech companies are selling your personal data to advertisers without consent."
+    results3 = router.route_post_to_bots(post3)
+    print("\n[RESULT] Matched Bots:")
+    for bot in results3:
+        print(f"  ✓ {bot['bot_id']} (score: {bot['similarity_score']})")
+
