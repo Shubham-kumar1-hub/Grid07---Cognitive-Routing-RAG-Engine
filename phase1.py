@@ -116,7 +116,7 @@ if __name__ == "__main__":
     results1 = router.route_post_to_bots(post1)
     print("\n[RESULT] Matched Bots:")
     for bot in results1:
-        print(f"  ✓ {bot['bot_id']} (score: {bot['similarity_score']})")
+        print(f"   {bot['bot_id']} (score: {bot['similarity_score']})")
 
     print("\n" + "=" * 60 + "\n")
 
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     results2 = router.route_post_to_bots(post2)
     print("\n[RESULT] Matched Bots:")
     for bot in results2:
-        print(f"  ✓ {bot['bot_id']} (score: {bot['similarity_score']})")
+        print(f"   {bot['bot_id']} (score: {bot['similarity_score']})")
 
     print("\n" + "=" * 60 + "\n")
 
@@ -134,5 +134,5 @@ if __name__ == "__main__":
     results3 = router.route_post_to_bots(post3)
     print("\n[RESULT] Matched Bots:")
     for bot in results3:
-        print(f"  ✓ {bot['bot_id']} (score: {bot['similarity_score']})")
+        print(f"   {bot['bot_id']} (score: {bot['similarity_score']})")
 
